@@ -1,26 +1,25 @@
-<?php 
+<?php
 	function tanx_customize(){
 
 
 		$font_primary = ot_get_option('primary_font', 'Open Sans');
 		if(!isset($font_primary[0]['family'])){
 			$font_primary = array(array('family'=>$font_primary));
-			
+
 		}
 		$font_primary_name = str_replace(' ', '+',$font_primary[0]['family']);
-		wp_enqueue_style('tanx_primary_google_font', 'http://fonts.googleapis.com/css?family=' . $font_primary_name . ':400,100,900italic,900,700,500italic,500,700italic,400italic,300italic,300,100italic');
+		wp_enqueue_style('tanx_primary_google_font', 'https://fonts.googleapis.com/css?family=' . $font_primary_name . ':400,100,900italic,900,700,500italic,500,700italic,400italic,300italic,300,100italic');
 
 
 		$font_secondary = ot_get_option('secondary_font' , 'Open Sans');
 		if(!isset($font_secondary[0]['family'])){
-	
+
 			$font_secondary = array(array('family'=>$font_secondary));
 		}
 		$font_secondary_name = str_replace(' ', '+',$font_secondary[0]['family']);
-		wp_enqueue_style('tanx_secondary_google_font', 'http://fonts.googleapis.com/css?family=' . $font_secondary_name . ':400,100,900italic,900,700,500italic,500,700italic,400italic,300italic,300,100italic');
-		
+		wp_enqueue_style('tanx_secondary_google_font', 'https://fonts.googleapis.com/css?family=' . $font_secondary_name . ':400,100,900italic,900,700,500italic,500,700italic,400italic,300italic,300,100italic');
+
 		$custom_css = "
-		<style>
 			body {
 				font-size: " . ot_get_option('base_font_size') . "px;
 			}
@@ -36,7 +35,7 @@
 			.sidebar.main-sidebar {
 				background: " . ot_get_option('sidebar_background') . ";
 			}
-			 
+
 			.sidebar::-webkit-scrollbar-thumb {
 				border-radius: 2px
 				-webkit-box-shadow:inset 0px 0px 0px 6px " . ot_get_option('sidebar_background') . ";
@@ -171,7 +170,7 @@
 			}
 			p {
 				font-weight: " . ot_get_option('paragraph_font_weight') . ";
-			} 
+			}
 			.bottom-overlay {
 				background: -moz-linear-gradient(top, " . ot_get_option("overlay_primary_color") . " 0%, " . ot_get_option("overlay_secondary_color") . " 100%);
 			    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%," . ot_get_option("overlay_primary_color") . "), color-stop(100%," . ot_get_option("overlay_secondary_color") . "));
@@ -179,8 +178,7 @@
 			    background: -o-linear-gradient(top, " . ot_get_option("overlay_primary_color") . " 0%," . ot_get_option("overlay_secondary_color") . " 100%);
 			    background: -ms-linear-gradient(top, " . ot_get_option("overlay_primary_color") . " 0%," . ot_get_option("overlay_secondary_color") . " 100%);
 			    background: linear-gradient(to bottom, " . ot_get_option("overlay_primary_color") . " 0%, " . ot_get_option("overlay_secondary_color") . " 100%);
-			}
-		</style>";
+			}";
 		wp_add_inline_style('main', $custom_css);
 	}
 

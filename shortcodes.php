@@ -1,6 +1,7 @@
-<?php 
+<?php
 add_filter( 'the_content', 'remove_first_gallery' );
     function remove_first_gallery( $content ) {
+        global $post;
         if(get_post_format($post->ID) == "gallery") {
             $content = preg_replace('/\[gallery.*?\]/','',$content);
         }
@@ -54,5 +55,5 @@ add_filter( 'the_content', 'remove_first_gallery' );
     function fullsizemap_shortcode( $atts, $content ){
         return '<div class="map_holder">' . do_shortcode($content) . '</div><div class="map_spacer"></div>';
     }
-    add_shortcode( 'fullsizemap', 'fullsizemap_shortcode' ); 
+    add_shortcode( 'fullsizemap', 'fullsizemap_shortcode' );
 ?>

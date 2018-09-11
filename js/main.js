@@ -43,7 +43,7 @@ jQuery(function($) {
             $(this).attr('data-lightbox', gallery.attr('id'));
             var galleryItem = $(this).parents(".gallery-item");
             $(this).attr('data-title', galleryItem.find('.wp-caption-text').html());
-        }); 
+        });
 
         $('a[rel^="attachment"]').each(function(){
             if($(this).find('img').length > 0) {
@@ -80,7 +80,7 @@ jQuery(function($) {
         $('.portfolio-item-holder .overlay').each(function(){
             $(this).height($(this).parent().height());
         });
-        if(map != null) {
+        if(map && map != null) {
             if (map.parent().hasClass('map_holder')) {
                 map.parent().width($(window).width());
                 map.css('left', -map.offset().left + 'px');

@@ -62,7 +62,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-			if ( $args->has_children )
+			if ( is_object( $args ) && $args->has_children )
 				$class_names .= ' dropdown';
 
 			if ( in_array( 'current-menu-item', $classes ) )
@@ -81,7 +81,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
 
 			// If item has_children add atts to a.
-			if ( $args->has_children && $depth === 0 ) {
+			if ( is_object( $args ) && $args->has_children && $depth === 0 ) {
 				$atts['href']   		= '#';
 				$atts['data-toggle']	= 'dropdown';
 				$atts['class']			= 'dropdown-toggle';
@@ -100,7 +100,10 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 				}
 			}
 
-			$item_output = $args->before;
+			$item_output = '';
+			if ( is_object( $args ) ) {
+				$item_output = $args->before;
+			}
 
 			/*
 			 * Glyphicons
@@ -114,9 +117,14 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			else
 				$item_output .= '<a'. $attributes .'>';
 
-			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-			$item_output .= ( $args->has_children && 0 === $depth ) ? ' <i class="arrow_carrot-down dropdownIndicator"></i></a>' : '</a>';
-			$item_output .= $args->after;
+			if ( is_object( $args ) ) {
+				$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+				$item_output .= ( $args->has_children && 0 === $depth ) ? ' <i class="arrow_carrot-down dropdownIndicator"></i></a>' : '</a>';
+				$item_output .= $args->after;
+			} else {
+				$item_output .= apply_filters( 'the_title', $item->title, $item->ID );
+			}
+
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		}

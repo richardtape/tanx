@@ -97,7 +97,7 @@ function tanx_enqueue_my_scripts() {
     wp_enqueue_style("animate", get_template_directory_uri() . "/css/animate.css");
     wp_enqueue_style("font-awesome", 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
     wp_enqueue_style("lightbox", get_template_directory_uri() . "/css/lightbox.css");
-    wp_enqueue_style("socicons", "http://file.myfontastic.com/n6vo44Re5QaWo8oCKShBs7/icons.css");
+    wp_enqueue_style("socicons", "https://file.myfontastic.com/n6vo44Re5QaWo8oCKShBs7/icons.css");
     wp_enqueue_style("social-fix", get_template_directory_uri() . "/css/social_fix.css");
     wp_enqueue_style("owl", get_template_directory_uri() . "/css/owl.css");
     wp_enqueue_style("main", get_template_directory_uri() . "/style.css");
