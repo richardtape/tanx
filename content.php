@@ -5,16 +5,16 @@
 	</span>
 <?php } ?>
 <div class="post-content">
-	<?php 
-	$more_string = __('Continue reading', 'tanx');
-	if(has_excerpt( $post->ID )) { ?>
+	<?php
+	$more_string = __( 'Continue reading', 'tanx' );
+	if ( ! is_single() && has_excerpt( $post->ID ) ) { ?>
 	<p>
-		<?php 
+		<?php
 		echo get_the_excerpt();
 		?> <a href="<?php the_permalink(); ?>" class="more-link"><?php echo $more_string; ?></a>
 	</p> <?php
 }
-else 
+else
 	the_content($more_string);
 	if(shortcode_exists('[ssba_hide]')) {
 		echo do_shortcode("[ssba_hide]");
