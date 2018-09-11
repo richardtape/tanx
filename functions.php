@@ -50,7 +50,7 @@ function tanx_register_required_plugins() {
             'source'             => 'https://downloads.wordpress.org/plugin/contact-form-7.4.4.zip',
             'external_url'       => 'https://sr.wordpress.org/plugins/contact-form-7/', // page of my plugin
         )
-        
+
         // <snip />
     );
 
@@ -101,7 +101,7 @@ function tanx_enqueue_my_scripts() {
     wp_enqueue_style("social-fix", get_template_directory_uri() . "/css/social_fix.css");
     wp_enqueue_style("owl", get_template_directory_uri() . "/css/owl.css");
     wp_enqueue_style("main", get_template_directory_uri() . "/style.css");
-    
+
     // Scripts
     wp_enqueue_script("owl", get_template_directory_uri() . "/js/owl.carousel.js", array('jquery'));
     wp_enqueue_script("social", get_template_directory_uri() . "/js/social.js");
@@ -115,11 +115,11 @@ function tanx_enqueue_my_scripts() {
 add_action( 'wp_head', 'tanx_enqueue_my_scripts');
 
 function tanx_init_support() {
-    add_theme_support( 'post-thumbnails' ); 
+    add_theme_support( 'post-thumbnails' );
 
     add_theme_support( 'automatic-feed-links' );
 
-    add_theme_support( 'post-formats', array('gallery','image','video','quote') ); 
+    add_theme_support( 'post-formats', array('gallery','image','video','quote') );
 }
 add_action( "init", "tanx_init_support" );
 
@@ -176,8 +176,12 @@ function is_edit_page($new_edit = null){
         return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
 }
 
-if(is_admin()) {
+add_action( 'admin_enqueue_scripts', 'admin_enqueue_scripts__load_admin_meta_js' );
+
+function admin_enqueue_scripts__load_admin_meta_js() {
+
     wp_enqueue_script('meta', get_template_directory_uri() . '/js/meta.js');
+
 }
 
 function tanx_register_portfolio_taxonomy() {
@@ -253,7 +257,7 @@ add_action('init', 'tanx_register_portfolio_taxonomy');
 
 
 
-    
+
 
     function SearchFilter($query) {
         if ($query->is_search) {
@@ -399,10 +403,10 @@ function tanx_comment_placeholders( $fields )
     );
     return $fields;
 }
- 
+
 /* Add Placehoder in comment Form Field (Comment) */
 add_filter( 'comment_form_defaults', 'tanx_textarea_placeholder' );
- 
+
 function tanx_textarea_placeholder( $fields )
 {
         $fields['comment_field'] = str_replace(
@@ -418,17 +422,17 @@ require_once('customizer.php');
 
 function wpdocs_filter_wp_title( $title, $sep ) {
     global $paged, $page;
- 
+
     if ( is_feed() )
         return $title;
- 
+
     // Add the site name.
- 
+
     // Add the site description for the home/front page.
     $site_description = get_bloginfo( 'description', 'display' );
     $blogtitle = get_bloginfo( 'name' );
     $title = $blogtitle . " " . $sep . " " . $site_description;
- 
+
     return $title;
 }
 add_filter( 'wp_title', 'wpdocs_filter_wp_title', 10, 2 );
